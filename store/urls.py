@@ -1,4 +1,4 @@
-# Ye file 'store/urls.py' banegi
+
 from django.urls import path
 from . import views
 
