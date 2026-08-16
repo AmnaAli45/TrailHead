@@ -10,36 +10,40 @@
   <a href="{% url 'shop' %}" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">&larr; Back to shop</a>
 
   <div style="display: flex; gap: 3rem; flex-wrap: wrap; margin-top: 1.5rem;">
-    <div style="flex: 1; min-width: 280px;">
-      <div class="product-thumb" style="border-radius: 8px;"><img src="{% static 'images/'|add:product.image %}" alt="{{ product.name }}"></div>
+    <div class="reveal" style="flex: 1; min-width: 280px;">
+      <div class="product-thumb" style="border-radius: 8px;">
+        <img src="{% static 'images/'|add:product.image %}" alt="{{ product.name }}">
+      </div>
     </div>
-    <div style="flex: 1; min-width: 280px;">
+    <div class="reveal reveal-delay-1" style="flex: 1; min-width: 280px;">
       <span class="product-tag">{{ product.category }}</span>
       <h2 style="margin: 0.3rem 0 0.6rem;">{{ product.name }}</h2>
       <div class="product-price" style="font-size: 1.3rem; margin-bottom: 1.2rem;">{{ product.price }}</div>
       <p style="color: var(--text-muted); line-height: 1.6;">{{ product.description }}</p>
 
       <div class="mt-3" style="display: flex; gap: 0.6rem; margin: 1.2rem 0;">
-        {% for size in "S,M,L,XL"|make_list %}{% endfor %}
-        <span class="mono" style="border: 1px solid var(--border); border-radius: 4px; padding: 0.4rem 0.8rem; font-size: 0.8rem;">S</span>
-        <span class="mono" style="border: 1px solid var(--border); border-radius: 4px; padding: 0.4rem 0.8rem; font-size: 0.8rem;">M</span>
-        <span class="mono" style="border: 1px solid var(--border); border-radius: 4px; padding: 0.4rem 0.8rem; font-size: 0.8rem;">L</span>
-        <span class="mono" style="border: 1px solid var(--border); border-radius: 4px; padding: 0.4rem 0.8rem; font-size: 0.8rem;">XL</span>
+        <span class="mono size-swatch selected" style="border: 1px solid var(--border); border-radius: 4px; padding: 0.4rem 0.8rem; font-size: 0.8rem;">S</span>
+        <span class="mono size-swatch" style="border: 1px solid var(--border); border-radius: 4px; padding: 0.4rem 0.8rem; font-size: 0.8rem;">M</span>
+        <span class="mono size-swatch" style="border: 1px solid var(--border); border-radius: 4px; padding: 0.4rem 0.8rem; font-size: 0.8rem;">L</span>
+        <span class="mono size-swatch" style="border: 1px solid var(--border); border-radius: 4px; padding: 0.4rem 0.8rem; font-size: 0.8rem;">XL</span>
       </div>
 
-      <button class="btn-trail" style="border: none;">Add to Cart</button>
+      <button class="btn-trail btn-add-cart" style="border: none;">Add to Cart</button>
       <p class="mt-3" style="font-size: 0.8rem; color: var(--blaze-moss);">✓ In stock &middot; Ships in 1-2 days</p>
     </div>
   </div>
 
   <hr style="border-color: var(--border); margin: 3.5rem 0 2rem;">
 
-  <h3 style="font-size: 1.1rem; margin-bottom: 1.2rem;"><span class="blaze moss"></span>You might also like</h3>
+  <h3 class="reveal" style="font-size: 1.1rem; margin-bottom: 1.2rem;"><span class="blaze moss"></span>You might also like</h3>
   <div class="product-grid">
     {% for p in products %}
       {% if p.id != product.id and forloop.counter <= 3 %}
-      <a href="{% url 'product_detail' p.id %}" class="product-card">
-        <div class="product-thumb"><img src="{% static 'images/'|add:p.image %}" alt="{{ p.name }}"></div>
+      <a href="{% url 'product_detail' p.id %}" class="product-card reveal reveal-delay-{{ forloop.counter }}">
+        <div class="product-thumb">
+          <img src="{% static 'images/'|add:p.image %}" alt="{{ p.name }}">
+          <div class="quick-add">Quick view</div>
+        </div>
         <div class="product-body">
           <span class="product-tag">{{ p.category }}</span>
           <div class="product-name">{{ p.name }}</div>

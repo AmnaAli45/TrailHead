@@ -8,12 +8,12 @@
 <div style="width: 100%; padding: 4.5rem 0 3.5rem; background-image: linear-gradient(rgba(20,32,27,0.65), rgba(20,32,27,0.9)), url('{% static "images/hero.jpg" %}'); background-size: cover; background-position: center;">
   <div class="container-narrow">
   <div style="max-width: 640px;">
-    <span class="product-tag"><span class="blaze gold" style="width:6px;height:11px;"></span>New season gear</span>
-    <h1 class="display" style="font-size: 3.4rem; line-height: 1; margin: 0.4rem 0 1.2rem;">Gear up.<br>Get out.</h1>
-    <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 480px;">
+    <span class="product-tag hero-anim hero-anim-1"><span class="blaze gold" style="width:6px;height:11px;"></span>New season gear</span>
+    <h1 class="display hero-anim hero-anim-2" style="font-size: 3.4rem; line-height: 1; margin: 0.4rem 0 1.2rem;">Gear up.<br>Get out.</h1>
+    <p class="hero-anim hero-anim-3" style="color: var(--text-muted); font-size: 1.05rem; max-width: 480px;">
       Equipment tested on real trails, not just in a warehouse. Everything you need for the next ridge, the next summit, the next long weekend off-grid.
     </p>
-    <div class="mt-4">
+    <div class="mt-4 hero-anim hero-anim-4">
       <a href="{% url 'shop' %}" class="btn-trail">Shop the collection</a>
       <a href="{% url 'about' %}" class="btn-outline-trail ms-2">Our story</a>
     </div>
@@ -21,15 +21,18 @@
   </div>
 </div>
 
-<div class="container-narrow">
-  <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.4rem;">
+<div class="container-narrow" style="margin-top: 3rem;">
+  <div class="reveal" style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.4rem;">
     <h3 style="margin: 0; font-size: 1.4rem;"><span class="blaze orange"></span>Featured Gear</h3>
     <a href="{% url 'shop' %}" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">View all &rarr;</a>
   </div>
   <div class="product-grid">
     {% for p in products %}
-    <a href="{% url 'product_detail' p.id %}" class="product-card">
-      <div class="product-thumb"><img src="{% static 'images/'|add:p.image %}" alt="{{ p.name }}"></div>
+    <a href="{% url 'product_detail' p.id %}" class="product-card reveal reveal-delay-{{ forloop.counter }}">
+      <div class="product-thumb">
+        <img src="{% static 'images/'|add:p.image %}" alt="{{ p.name }}">
+        <div class="quick-add">Quick view</div>
+      </div>
       <div class="product-body">
         <span class="product-tag">{{ p.category }}</span>
         <div class="product-name">{{ p.name }}</div>
@@ -40,10 +43,10 @@
   </div>
 </div>
 
-<div class="container-narrow mt-5 pt-4" style="border-top: 1px solid var(--border);">
+<div class="container-narrow mt-5 pt-4 reveal" style="border-top: 1px solid var(--border);">
   <div style="display:flex; gap: 2rem; flex-wrap: wrap;">
     <div style="flex:1; min-width: 200px;">
-      <div class="mono" style="color: var(--blaze-gold); font-size: 1.6rem;">30-day</div>
+      <div class="mono" style="color: var(--blaze-gold); font-size: 1.6rem;"><span data-count-to="30" data-suffix="-day">0</span></div>
       <p style="color: var(--text-muted); font-size: 0.85rem;">Trail-test return window</p>
     </div>
     <div style="flex:1; min-width: 200px;">
@@ -51,7 +54,7 @@
       <p style="color: var(--text-muted); font-size: 0.85rem;">Shipping over $75</p>
     </div>
     <div style="flex:1; min-width: 200px;">
-      <div class="mono" style="color: var(--blaze-gold); font-size: 1.6rem;">10yr</div>
+      <div class="mono" style="color: var(--blaze-gold); font-size: 1.6rem;"><span data-count-to="10" data-suffix="yr">0</span></div>
       <p style="color: var(--text-muted); font-size: 0.85rem;">Warranty on hard goods</p>
     </div>
   </div>
