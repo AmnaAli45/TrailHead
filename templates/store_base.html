@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Trailhead — Gear up. Get out.{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #14201B;
+    --surface: #1B2A23;
+    --surface-light: #22342B;
+    --border: #2E4239;
+    --text: #EDE7DA;
+    --text-muted: #9CAA9F;
+    --blaze-orange: #E2662D;
+    --blaze-gold: #C9A227;
+    --blaze-moss: #6B8F71;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Work Sans', sans-serif; }
+  h1, h2, h3, .display { font-family: 'Big Shoulders Display', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; }
+  .mono { font-family: 'Space Mono', monospace; }
+  a { color: inherit; }
+  .blaze { display: inline-block; width: 10px; height: 18px; border-radius: 2px; margin-right: 10px; vertical-align: middle; }
+  .blaze.orange { background: var(--blaze-orange); }
+  .blaze.gold { background: var(--blaze-gold); }
+  .blaze.moss { background: var(--blaze-moss); }
+  .site-nav { border-bottom: 1px solid var(--border); padding: 1.1rem 0; background: rgba(20, 32, 27, 0.9); backdrop-filter: blur(6px); position: sticky; top: 0; z-index: 50; }
+  .nav-inner { max-width: 1180px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; }
+  .brand { font-family: 'Big Shoulders Display', sans-serif; font-size: 1.6rem; font-weight: 800; text-transform: uppercase; display: flex; align-items: center; text-decoration: none; color: var(--text); }
+  .nav-links { display: flex; gap: 1.8rem; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; display: flex; align-items: center; }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
+  .nav-links a .blaze { width: 6px; height: 12px; margin-right: 7px; opacity: 0; transition: opacity 0.15s; }
+  .nav-links a:hover .blaze, .nav-links a.active .blaze { opacity: 1; }
+  .cart-pill { border: 1px solid var(--border); border-radius: 20px; padding: 0.35rem 0.9rem; font-size: 0.8rem; }
+  .container-narrow { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
+  .site-footer { border-top: 1px solid var(--border); margin-top: 5rem; padding: 2.5rem 0; color: var(--text-muted); font-size: 0.85rem; }
+  .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+  .btn-trail { display: inline-block; background: var(--blaze-orange); color: #14201B; font-weight: 600; text-decoration: none; padding: 0.75rem 1.6rem; border-radius: 4px; border: none; font-size: 0.9rem; letter-spacing: 0.02em; cursor: pointer; }
+  .btn-trail:hover { background: #f0763a; color: #14201B; }
+  .btn-outline-trail { display: inline-block; background: transparent; color: var(--text); border: 1px solid var(--border); text-decoration: none; padding: 0.7rem 1.5rem; border-radius: 4px; font-size: 0.9rem; }
+  .btn-outline-trail:hover { border-color: var(--blaze-moss); color: var(--text); }
+  .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
+  @media (max-width: 900px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .product-grid { grid-template-columns: 1fr; } }
+  .product-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; text-decoration: none; color: var(--text); display: block; transition: border-color 0.15s; }
+  .product-card:hover { border-color: var(--blaze-orange); color: var(--text); }
+  .product-thumb { background: var(--surface-light); aspect-ratio: 1/1; overflow: hidden; }
+  .product-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .product-body { padding: 1.1rem 1.2rem 1.3rem; }
+  .product-name { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.3rem; }
+  .product-price { font-family: 'Space Mono', monospace; color: var(--blaze-gold); font-size: 0.9rem; }
+  .product-tag { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--blaze-moss); margin-bottom: 0.5rem; }
+</style>
+</head>
+<body data-page-type="{% block page_type %}other{% endblock %}" data-page-value="{% block page_value %}0{% endblock %}">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="{% url 'home' %}" class="brand"><span class="blaze orange"></span>Trailhead</a>
+    <div class="nav-links">
+      <a href="{% url 'shop' %}" class="{% block nav_shop %}{% endblock %}"><span class="blaze orange"></span>Shop</a>
+      <a href="{% url 'about' %}" class="{% block nav_about %}{% endblock %}"><span class="blaze moss"></span>About</a>
+      <a href="{% url 'contact' %}" class="{% block nav_contact %}{% endblock %}"><span class="blaze gold"></span>Contact</a>
+      <a href="{% url 'cart' %}" class="cart-pill">Cart (2)</a>
+    </div>
+  </div>
+</nav>
+
+{% block content %}{% endblock %}
+
+<footer class="site-footer">
+  <div class="container-narrow">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="font-size: 1.2rem;"><span class="blaze orange"></span>Trailhead</div>
+        <p class="mt-2" style="max-width: 280px;">Gear built for the trail, tested by people who actually use it.</p>
+      </div>
+      <div>
+        <div class="mono" style="color: var(--text);">Find your route</div>
+        <p class="mt-2"><a href="{% url 'shop' %}">Shop all gear</a></p>
+        <p><a href="{% url 'about' %}">Our story</a></p>
+        <p><a href="{% url 'contact' %}">Get in touch</a></p>
+      </div>
+    </div>
+    <p class="mt-4" style="opacity: 0.6;">This is a demo storefront built to showcase GetScry's visitor intent tracking.</p>
+  </div>
+</footer>
+
+<script>
+  // GetScry API base URL - FastAPI alag server/port pe chal rahi hai
+  window.GETSCRY_API_URL = "http://127.0.0.1:8000";
+</script>
+<script src="{% static 'tracker.js' %}"></script>
+</body>
+</html>
