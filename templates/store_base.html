@@ -55,6 +55,22 @@
   .product-name { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.3rem; }
   .product-price { font-family: 'Space Mono', monospace; color: var(--blaze-gold); font-size: 0.9rem; }
   .product-tag { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--blaze-moss); margin-bottom: 0.5rem; }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 768px) {
+    .nav-inner { padding: 0 1.2rem; flex-wrap: wrap; gap: 0.8rem; }
+    .nav-links { gap: 1rem; flex-wrap: wrap; font-size: 0.8rem; }
+    .brand { font-size: 1.3rem; }
+    .container-narrow { padding: 0 1.2rem; }
+    h1.display, .display { font-size: 2.2rem !important; }
+    .footer-grid { flex-direction: column; gap: 2rem; }
+  }
+
+  @media (max-width: 480px) {
+    .nav-links a span.blaze { display: none; }
+    .cart-pill { font-size: 0.72rem; padding: 0.3rem 0.6rem; }
+    .btn-trail, .btn-outline-trail { display: block; width: 100%; text-align: center; margin: 0.4rem 0 !important; }
+  }
 </style>
 </head>
 <body data-page-type="{% block page_type %}other{% endblock %}" data-page-value="{% block page_value %}0{% endblock %}">
@@ -63,6 +79,7 @@
   <div class="nav-inner">
     <a href="{% url 'home' %}" class="brand"><span class="blaze orange"></span>Trailhead</a>
     <div class="nav-links">
+      <a href="{% url 'home' %}" class="{% block nav_home %}{% endblock %}"><span class="blaze orange"></span>Home</a>
       <a href="{% url 'shop' %}" class="{% block nav_shop %}{% endblock %}"><span class="blaze orange"></span>Shop</a>
       <a href="{% url 'about' %}" class="{% block nav_about %}{% endblock %}"><span class="blaze moss"></span>About</a>
       <a href="{% url 'contact' %}" class="{% block nav_contact %}{% endblock %}"><span class="blaze gold"></span>Contact</a>

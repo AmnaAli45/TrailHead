@@ -2,9 +2,11 @@
 {% load static %}
 {% block title %}Trailhead — Gear up. Get out.{% endblock %}
 {% block page_type %}other{% endblock %}
+{% block nav_home %}active{% endblock %}
 
 {% block content %}
-<div class="container-narrow" style="padding-top: 4rem; padding-bottom: 3rem; background-image: linear-gradient(rgba(20,32,27,0.65), rgba(20,32,27,0.9)), url('{% static "images/hero.jpg" %}'); background-size: cover; background-position: center; margin-bottom: 0;">
+<div style="width: 100%; padding: 4.5rem 0 3.5rem; background-image: linear-gradient(rgba(20,32,27,0.65), rgba(20,32,27,0.9)), url('{% static "images/hero.jpg" %}'); background-size: cover; background-position: center;">
+  <div class="container-narrow">
   <div style="max-width: 640px;">
     <span class="product-tag"><span class="blaze gold" style="width:6px;height:11px;"></span>New season gear</span>
     <h1 class="display" style="font-size: 3.4rem; line-height: 1; margin: 0.4rem 0 1.2rem;">Gear up.<br>Get out.</h1>
@@ -15,6 +17,7 @@
       <a href="{% url 'shop' %}" class="btn-trail">Shop the collection</a>
       <a href="{% url 'about' %}" class="btn-outline-trail ms-2">Our story</a>
     </div>
+  </div>
   </div>
 </div>
 
