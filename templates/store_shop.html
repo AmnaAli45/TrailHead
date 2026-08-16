@@ -1,0 +1,26 @@
+{% extends "store_base.html" %}
+{% load static %}
+{% block title %}Shop All Gear — Trailhead{% endblock %}
+{% block page_type %}product{% endblock %}
+{% block page_value %}5{% endblock %}
+{% block nav_shop %}active{% endblock %}
+
+{% block content %}
+<div class="container-narrow" style="padding-top: 2.5rem;">
+  <span class="product-tag"><span class="blaze orange" style="width:6px;height:11px;"></span>{{ products|length }} products</span>
+  <h2 style="margin: 0.3rem 0 2rem;">Shop All Gear</h2>
+
+  <div class="product-grid">
+    {% for p in products %}
+    <a href="{% url 'product_detail' p.id %}" class="product-card">
+      <div class="product-thumb"><img src="{% static 'images/'|add:p.image %}" alt="{{ p.name }}"></div>
+      <div class="product-body">
+        <span class="product-tag">{{ p.category }}</span>
+        <div class="product-name">{{ p.name }}</div>
+        <div class="product-price">{{ p.price }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
