@@ -1,0 +1,31 @@
+{% extends "store_base.html" %}
+{% load static %}
+{% block title %}Your Cart — Trailhead{% endblock %}
+{% block page_type %}admin{% endblock %}
+{% block page_value %}0{% endblock %}
+
+{% block content %}
+<div class="container-narrow" style="padding-top: 2.5rem; max-width: 640px;">
+  <h2 style="margin-bottom: 1.5rem;">Your Cart</h2>
+
+  {% for p in cart_items %}
+  <div style="display:flex; align-items:center; gap: 1.2rem; padding: 1rem 0; border-bottom: 1px solid var(--border);">
+    <div style="width: 56px; height: 56px; border-radius: 6px; overflow: hidden; flex-shrink: 0;">
+      <img src="{% static 'images/'|add:p.image %}" alt="{{ p.name }}" style="width:100%; height:100%; object-fit: cover;">
+    </div>
+    <div style="flex:1;">
+      <div class="product-name">{{ p.name }}</div>
+      <span class="product-tag">{{ p.category }}</span>
+    </div>
+    <div class="product-price">{{ p.price }}</div>
+  </div>
+  {% endfor %}
+
+  <div style="display:flex; justify-content: space-between; padding: 1.5rem 0; font-size: 1.1rem;">
+    <span>Total</span>
+    <span class="mono" style="color: var(--blaze-gold);">$148</span>
+  </div>
+
+  <button class="btn-trail" style="width: 100%; text-align: center;">Checkout</button>
+</div>
+{% endblock %}
