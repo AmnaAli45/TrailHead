@@ -81,12 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
     function animateDot() {
       dotX += (mouseX - dotX) * 0.18;
       dotY += (mouseY - dotY) * 0.18;
-      dot.style.transform = `translate(${dotX}px, ${dotY}px)`;
+      dot.style.transform = "translate(" + dotX + "px, " + dotY + "px)";
       requestAnimationFrame(animateDot);
     }
     animateDot();
 
-    // Grow the dot slightly over links/buttons/cards
     document.querySelectorAll("a, button").forEach((el) => {
       el.addEventListener("mouseenter", () => dot.classList.add("blaze-cursor--hover"));
       el.addEventListener("mouseleave", () => dot.classList.remove("blaze-cursor--hover"));
@@ -116,5 +115,61 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 1400);
     });
   });
+
+  // ---------- 7. Checkout button (demo) ----------
+  const checkoutBtn = document.querySelector(".btn-checkout");
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener("click", () => {
+      if (checkoutBtn.dataset.animating === "true") return;
+      checkoutBtn.dataset.animating = "true";
+      checkoutBtn.classList.add("btn-pulse");
+      checkoutBtn.textContent = "Order Placed!";
+      checkoutBtn.disabled = true;
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 1600);
+    });
+  }
+
+  // ---------- 8. Contact form (demo) ----------
+  const contactForm = document.querySelector(".contact-form");
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const nameField = contactForm.querySelector("[name=name]");
+      const emailField = contactForm.querySelector("[name=email]");
+      const messageField = contactForm.querySelector("[name=message]");
+      const successBox = document.querySelector(".contact-success");
+
+      if (!nameField.value.trim() || !emailField.value.trim() || !messageField.value.trim()) {
+        contactForm.classList.add("shake");
+        setTimeout(() => contactForm.classList.remove("shake"), 400);
+        return;
+      }
+
+      // GetScry ko is visitor ki identity bhejein (jo behavior se already track ho raha hai)
+      const apiUrl = window.GETSCRY_API_URL || "http://127.0.0.1:8000";
+      const sessionId = sessionStorage.getItem("getscry_session_id");
+
+      if (sessionId) {
+        fetch(apiUrl + "/identify", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            session_id: sessionId,
+            name: nameField.value.trim(),
+            email: emailField.value.trim(),
+          }),
+        }).catch(() => {});   // demo ke liye, fail silently
+      }
+
+      contactForm.style.display = "none";
+      if (successBox) {
+        successBox.style.display = "block";
+        successBox.classList.add("reveal");
+        requestAnimationFrame(() => successBox.classList.add("is-visible"));
+      }
+    });
+  }
 
 });

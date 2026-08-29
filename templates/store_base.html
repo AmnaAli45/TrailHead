@@ -151,6 +151,13 @@
   @media (max-width: 768px) {
     .blaze-cursor { display: none; }
   }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+  }
+  .shake { animation: shake 0.4s ease; }
 </style>
 </head>
 <body data-page-type="{% block page_type %}other{% endblock %}" data-page-value="{% block page_value %}0{% endblock %}">

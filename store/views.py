@@ -48,4 +48,10 @@ def cart(request):
     cart_items = [PRODUCTS[0], PRODUCTS[2]]
     return render(request, "store_cart.html", {"cart_items": cart_items})
 
-
+def order_confirmation(request):
+    cart_items = [PRODUCTS[0], PRODUCTS[2]]
+    total = sum(int(p["price"].replace("$", "")) for p in cart_items)
+    return render(request, "store_order_confirmation.html", {
+        "cart_items": cart_items,
+        "total": total,
+    })

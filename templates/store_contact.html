@@ -6,24 +6,30 @@
 
 {% block content %}
 <div class="container-narrow" style="padding-top: 2.5rem; max-width: 560px;">
-  <span class="product-tag"><span class="blaze gold" style="width:6px;height:11px;"></span>We reply within a day</span>
-  <h2 style="margin: 0.3rem 0 1.5rem;">Get in touch</h2>
+  <span class="product-tag reveal"><span class="blaze gold" style="width:6px;height:11px;"></span>We reply within a day</span>
+  <h2 class="reveal" style="margin: 0.3rem 0 1.5rem;">Get in touch</h2>
 
-  <form>
+  <form class="contact-form reveal">
     {% csrf_token %}
     <div class="mb-3">
       <label class="mb-1" style="font-size: 0.85rem; color: var(--text-muted); display:block;">Name</label>
-      <input type="text" style="width:100%; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 0.7rem; color: var(--text);">
+      <input type="text" name="name" style="width:100%; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 0.7rem; color: var(--text);">
     </div>
     <div class="mb-3">
       <label class="mb-1" style="font-size: 0.85rem; color: var(--text-muted); display:block;">Email</label>
-      <input type="email" style="width:100%; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 0.7rem; color: var(--text);">
+      <input type="email" name="email" style="width:100%; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 0.7rem; color: var(--text);">
     </div>
     <div class="mb-3">
       <label class="mb-1" style="font-size: 0.85rem; color: var(--text-muted); display:block;">Message</label>
-      <textarea rows="4" style="width:100%; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 0.7rem; color: var(--text);"></textarea>
+      <textarea name="message" rows="4" style="width:100%; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 0.7rem; color: var(--text);"></textarea>
     </div>
-    <button type="button" class="btn-trail">Send message</button>
+    <button type="submit" class="btn-trail">Send message</button>
   </form>
+
+  <div class="contact-success" style="display: none; text-align: center; padding: 2rem 0;">
+    <div style="font-size: 2rem; margin-bottom: 0.6rem;">✓</div>
+    <h5 style="margin-bottom: 0.4rem;">Message sent</h5>
+    <p style="color: var(--text-muted); font-size: 0.9rem;">Thanks for reaching out — we'll get back to you within a day.</p>
+  </div>
 </div>
 {% endblock %}

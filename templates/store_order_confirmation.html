@@ -1,0 +1,44 @@
+{% extends "store_base.html" %}
+{% load static %}
+{% block title %}Order Confirmed — Trailhead{% endblock %}
+{% block page_type %}admin{% endblock %}
+{% block page_value %}0{% endblock %}
+
+{% block content %}
+<div class="container-narrow" style="padding-top: 3.5rem; max-width: 560px; text-align: center;">
+
+  <div class="reveal" style="width: 64px; height: 64px; border-radius: 50%; background: var(--blaze-moss); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.8rem;">
+    ✓
+  </div>
+
+  <h2 class="reveal reveal-delay-1">Order confirmed</h2>
+  <p class="reveal reveal-delay-2" style="color: var(--text-muted); margin-bottom: 2.5rem;">
+    Thanks for your order — this is a demo checkout, so nothing was actually charged, but here's what it would have looked like.
+  </p>
+
+  <div class="reveal reveal-delay-3" style="text-align: left; border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem;">
+    {% for p in cart_items %}
+    <div style="display:flex; align-items:center; gap: 1rem; padding: 0.7rem 0; {% if not forloop.last %}border-bottom: 1px solid var(--border);{% endif %}">
+      <div style="width: 48px; height: 48px; border-radius: 6px; overflow: hidden; flex-shrink: 0;">
+        <img src="{% static 'images/'|add:p.image %}" alt="{{ p.name }}" style="width:100%; height:100%; object-fit: cover;">
+      </div>
+      <div style="flex:1;">
+        <div class="product-name" style="margin-bottom: 0;">{{ p.name }}</div>
+        <span class="product-tag" style="margin-bottom:0;">{{ p.category }}</span>
+      </div>
+      <div class="product-price">{{ p.price }}</div>
+    </div>
+    {% endfor %}
+    <div style="display:flex; justify-content: space-between; padding-top: 1rem; margin-top: 0.5rem; border-top: 1px solid var(--border); font-weight: 600;">
+      <span>Total paid</span>
+      <span class="mono" style="color: var(--blaze-gold);">${{ total }}</span>
+    </div>
+  </div>
+
+  <div class="reveal reveal-delay-4 mt-4" style="display: flex; gap: 0.8rem; justify-content: center;">
+    <a href="{% url 'shop' %}" class="btn-trail">Continue shopping</a>
+    <a href="{% url 'home' %}" class="btn-outline-trail">Back to home</a>
+  </div>
+
+</div>
+{% endblock %}
